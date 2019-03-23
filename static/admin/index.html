@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
   <title>GitHub Authentication Example</title>
   <!--- This example uses jQuery: -->
@@ -9,27 +8,32 @@
   <!-- Make sure to include Nelify's authentiation library -->
   <!-- Also available via npm as netlify-auth-providers -->
   <script src="https://unpkg.com/netlify-auth-providers"></script>
-
-  <script>
-    $(function () {
-      $("#login").on("click", function (e) {
-        e.preventDefault();
-        var authenticator = new netlify.default({});
-        authenticator.authenticate({ provider: "github", scope: "user" }, function (err, data) {
-          if (err) {
-            return $("#output").text("Error Authenticating with GitHub: " + err);
-          }
-          $("#output").text("Authenticated with GitHub. Access Token: " + data.token);
-        });
-      });
-    });
-  </script>
+  <!-- https://www.netlifycms.org/docs/add-to-your-site/#setup-on-netlify -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
-
 <body>
   <h1>GitHub Auth Demo:</h1>
   <p><a href="#" id="login">Authenticate</a></p>
   <p id="output"></p>
+  <script>
+    $(() => {
+      $('#login').on('click', (e) => {
+        e.preventDefault();
+        let authenticator = new netlify.default({});
+        authenticator.authenticate({ provider: 'github', scope: 'user' }, (err, data) => {
+          if (err) return $('#output').text(`Error Authenticating with GitHub: ${err}`);
+          $('#output').text(`Authenticated with GitHub. Access Token: ${data.token}`);
+        });
+      });
+    });
+    
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => document.location.href = '/admin/');
+        }
+      });
+    }
+  </script>
 </body>
-
 </html>
