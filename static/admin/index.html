@@ -11,15 +11,15 @@
   <script src="https://unpkg.com/netlify-auth-providers"></script>
 
   <script>
-    $(function () {
-      $("#login").on("click", function (e) {
+    $(() => {
+      $('#login').on('click', (e) => {
         e.preventDefault();
         var authenticator = new netlify.default({});
-        authenticator.authenticate({ provider: "github", scope: "user" }, function (err, data) {
+        authenticator.authenticate({ provider: 'github', scope: 'user' }, (err, data) => {
           if (err) {
-            return $("#output").text("Error Authenticating with GitHub: " + err);
+            return $('#output').text('Error Authenticating with GitHub: ' + err);
           }
-          $("#output").text("Authenticated with GitHub. Access Token: " + data.token);
+          $('#output').text('Authenticated with GitHub. Access Token: ' + data.token);
         });
       });
     });

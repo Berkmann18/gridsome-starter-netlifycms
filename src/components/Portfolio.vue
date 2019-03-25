@@ -17,7 +17,7 @@
     },
     filters: {
       truncate: function(text, length) {
-        return "background-image: url(" + text.substring(length) + ")"
+        return `background-image: url(${text.substring(length)})`
       }
     }
   } 
