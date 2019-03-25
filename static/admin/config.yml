@@ -4,7 +4,7 @@ backend:
   name: github
   branch: master
   repo: Berkmann18/gridsome-starter-netlifycms
-  site_id: https://compassionate-lalande-822e9b.netlify.com
+  site_id: compassionate-lalande-822e9b.netlify.com
 
 media_folder: "static/images"
 public_folder: "static/images"
